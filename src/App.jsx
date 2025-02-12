@@ -14,18 +14,26 @@ function App() {
 		{
 			id: 2,
 			title: "Estudar Ingles",
-			description:
-				"Estudar Ingles para se tornar um desenvolvedor full-stack",
+			description: "Estudar Ingles para se tornar um desenvolvedor full-stack",
 			isCompleted: false,
 		},
 		{
 			id: 3,
 			title: "ler um livro",
-			description:
-				"Ler um livro novo",
+			description: "Ler um livro novo",
 			isCompleted: false,
 		},
 	]);
+
+	function onTaskClick(taskId) {
+		const newTask = tasks.map((task) => {
+			if (task.id === taskId) {
+				return { ...task, isCompleted: !task.isCompleted };
+			}
+			return task;
+		});
+		setTasks(newTask);
+	}
 
 	return (
 		<div className="w-screen h-screen bg-slate-500 flex justify-center p-6">
@@ -34,7 +42,7 @@ function App() {
 					Gerenciador de Tarefa
 				</h1>
 				<AddTask />
-				<Task tasks={tasks}/>
+				<Task tasks={tasks} onTaskClick={onTaskClick}/>
 			</div>
 		</div>
 	);
